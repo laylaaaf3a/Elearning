@@ -16,7 +16,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/admin/student">
+        <a class="nav-link collapsed" href="/admin/course">
           <i class="bi bi-file-person-fill"></i>
           <span>Courses</span>
         </a>
