@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,13 @@ class StudentController extends Controller
     // Method untuk Menampilkan Form Tambah Student
     public function create()
     {
-        return view('admin.contents.student.create');
+        //mendapatkan data courses
+        $courses = Course::all();
+
+        // panggil view
+        return view('admin.contents.student.create',[
+            'courses' => $courses,
+        ]);
     }
 
     // Method untuk Menyimpan Data Baru
@@ -33,6 +40,7 @@ class StudentController extends Controller
             'nim' => 'required|numeric',
             'major' => 'required',
             'class' => 'required',
+            'courses_id' => 'nullable',
         ]);
 
         // Simpan ke Database
@@ -41,6 +49,7 @@ class StudentController extends Controller
             'nim' => $request->nim,
             'major' => $request->major,
             'class' => $request->class,
+            'courses_id' => $request->courses_id,
         ]);
 
         // Kemballikan ke Halaman Student
@@ -53,8 +62,11 @@ class StudentController extends Controller
         // Cari Data Student Berdasarkan ID
         $student = Student::find($id); // Select * From Students WHERE id = $id;
 
+        $courses = Course::all();
+
         return view('admin.contents.student.edit', [
-            'student' => $student
+            'student' => $student,
+            'courses' => $courses,
         ]);
     }
 
@@ -70,6 +82,7 @@ class StudentController extends Controller
             'nim' => 'required|numeric',
             'major' => 'required',
             'class' => 'required',
+            'courses_id' => 'nullable',
         ]);
 
         // Simpan ke Perubahan
@@ -78,6 +91,7 @@ class StudentController extends Controller
             'nim' => $request->nim,
             'major' => $request->major,
             'class' => $request->class,
+            'courses_id' => $request->courses_id,
         ]);
 
         // Kemballikan ke Halaman Student

@@ -24,7 +24,7 @@
                     </tr>
                     @foreach ($courses as $course)
                         <tr>
-                            <td>1</td>
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $course->name }}</td>
                             <td>{{ $course->category }}</td>
                             <td>{{ $course->description }}</td>
